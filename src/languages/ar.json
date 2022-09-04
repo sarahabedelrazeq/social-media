@@ -1,0 +1,21 @@
+{
+  "code": "ar",
+  "direction": "rtl",
+  "englishName": "Arabic",
+  "name": "العربيه",
+  "xLang": "English",
+
+  "Homepage": "الصفحة الرئيسية",
+  "Pages": "الصفحات",
+  "Groups": "مجموعات",
+  "Marketplace": "المتجر",
+  "Friends": "أصدقاء",
+  "Settings": "إعدادات",
+  "Profile": "الملف الشخصي",
+  "LatestConversations": "أحدث المحادثات",
+  "LatestPhotos": "أحدث الصور",
+  "OnlineFriends": "الأصدقاء عبر الإنترنت",
+  "Myaccount": "حسابي",
+  "Logout": "تسجيل خروج",
+  "test": "test"
+}
