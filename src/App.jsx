@@ -29,6 +29,13 @@ const routes = [
     component: React.lazy(() => import("pages/Home")),
     layout: true,
   },
+  {
+    path: "/profile/:id",
+    exact: true,
+    name: "Profile",
+    component: React.lazy(() => import("pages/Profile")),
+    layout: true,
+  },
 ];
 
 export default function App() {
@@ -53,7 +60,37 @@ export default function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <RTL>
+      {language.code === "ar" ? (
+        <RTL>
+          <div id="app">
+            <React.Suspense fallback={<React.Fragment></React.Fragment>}>
+              <Routes basename="/">
+                {routes.map((route, idx) => {
+                  return (
+                    route.component && (
+                      <Route
+                        key={idx}
+                        path={route.path}
+                        exact={route.exact}
+                        name={route.name}
+                        element={
+                          route.layout ? (
+                            <Layout>
+                              <route.component />
+                            </Layout>
+                          ) : (
+                            <route.component />
+                          )
+                        }
+                      />
+                    )
+                  );
+                })}
+              </Routes>
+            </React.Suspense>
+          </div>
+        </RTL>
+      ) : (
         <div id="app">
           <React.Suspense fallback={<React.Fragment></React.Fragment>}>
             <Routes basename="/">
@@ -81,7 +118,7 @@ export default function App() {
             </Routes>
           </React.Suspense>
         </div>
-      </RTL>
+      )}
     </ThemeProvider>
   );
 }

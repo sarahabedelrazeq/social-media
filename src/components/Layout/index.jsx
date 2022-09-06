@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 import Header from "components/Header";
 import Rightbar from "components/Rightbar";
 import Sidebar from "components/Sidebar";
@@ -10,19 +10,20 @@ export default function Layout({ children }) {
       bgcolor={"background.default"}
       color={"text.primary"}
       minHeight="100vh"
+      maxWidth="100vw"
     >
       <Header />
-      <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+      <Grid container spacing={2} justifyContent="space-between">
+        <Grid item lg={2} sx={{ display: { xs: "none", lg: "block" } }}>
           <Sidebar />
-        </Box>
-        <Box flex={4} p={{ xs: 0, md: 2 }}>
+        </Grid>
+        <Grid item lg={6} xs={12}>
           {children}
-        </Box>
-        <Box flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+        </Grid>
+        <Grid item lg={4} sx={{ display: { xs: "none", lg: "block" } }}>
           <Rightbar />
-        </Box>
-      </Stack>
+        </Grid>
+      </Grid>
       {/* <Add /> */}
     </Box>
   );

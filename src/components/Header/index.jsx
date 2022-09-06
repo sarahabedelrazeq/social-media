@@ -1,4 +1,9 @@
-import { Mail, Notifications, Pets, AccountCircle } from "@mui/icons-material";
+import {
+  Mail,
+  Notifications,
+  Search as SearchIcon,
+  AccountCircle,
+} from "@mui/icons-material";
 import {
   AppBar,
   IconButton,
@@ -23,11 +28,12 @@ export default function Header() {
     <AppBar position="sticky">
       <StyledToolbar>
         <img src="/images/sarah-logo.png" />
-        <Pets sx={{ display: { xs: "block", sm: "none" } }} />
-        <Search>
-          <InputBase placeholder="search..." />
-        </Search>
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+        <Box sx={{ display: { xs: "none", md: "flex" }, width: "40%" }}>
+          <Search>
+            <InputBase placeholder="search..." />
+          </Search>
+        </Box>
+        <Box sx={{ display: { xs: "flex", md: "flex" } }}>
           <IconButton
             size="large"
             aria-label="show 4 new mails"
@@ -45,6 +51,18 @@ export default function Header() {
             <Badge badgeContent={17} color="error">
               <Notifications />
             </Badge>
+          </IconButton>
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-controls="demo-positioned-menu"
+            aria-haspopup="true"
+            onClick={setOpen}
+            color="inherit"
+            sx={{ display: { xs: "flex", md: "none" } }}
+          >
+            <SearchIcon />
           </IconButton>
           <IconButton
             size="large"

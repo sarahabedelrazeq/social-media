@@ -7,7 +7,7 @@ import {
   Person,
   Settings,
   Storefront,
-  Language
+  Language,
 } from "@mui/icons-material";
 import {
   Box,
@@ -41,6 +41,14 @@ const Sidebar = () => {
         <ListItem disablePadding>
           <ListItemButton component="a" href="#simple-list">
             <ListItemIcon>
+              <AccountBox />
+            </ListItemIcon>
+            <ListItemText primary={language.Profile} />
+          </ListItemButton>
+        </ListItem>
+        {/* <ListItem disablePadding>
+          <ListItemButton component="a" href="#simple-list">
+            <ListItemIcon>
               <Article />
             </ListItemIcon>
             <ListItemText primary={language.Pages} />
@@ -61,7 +69,7 @@ const Sidebar = () => {
             </ListItemIcon>
             <ListItemText primary={language.Marketplace} />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
         <ListItem disablePadding>
           <ListItemButton component="a" href="#simple-list">
             <ListItemIcon>
@@ -70,22 +78,14 @@ const Sidebar = () => {
             <ListItemText primary={language.Friends} />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
+        {/* <ListItem disablePadding>
           <ListItemButton component="a" href="#simple-list">
             <ListItemIcon>
               <Settings />
             </ListItemIcon>
             <ListItemText primary={language.Settings} />
           </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
-            <ListItemIcon>
-              <AccountBox />
-            </ListItemIcon>
-            <ListItemText primary={language.Profile} />
-          </ListItemButton>
-        </ListItem>
+        </ListItem> */}
         <ListItem disablePadding>
           <ListItemButton component="a" href="#simple-list">
             <ListItemIcon>
@@ -102,7 +102,9 @@ const Sidebar = () => {
             <ListItemText
               primary={language.xLang}
               onClick={(e) =>
-                dispatch(switchLanguage(language.name === "English" ? "ar" : "en"))
+                dispatch(
+                  switchLanguage(language.name === "English" ? "ar" : "en")
+                )
               }
             />
           </ListItemButton>

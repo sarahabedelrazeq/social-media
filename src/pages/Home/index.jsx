@@ -1,6 +1,8 @@
 import { Box, Stack, Skeleton } from "@mui/material";
 import Post from "components/Post";
 import React, { useState } from "react";
+import posts from "data/posts.json";
+import users from "data/users.json";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -10,7 +12,7 @@ const Home = () => {
   }, [3000]);
 
   return (
-    <Box flex={4} p={{ xs: 0, md: 2 }}>
+    <div>
       {loading ? (
         <Stack spacing={1}>
           <Skeleton variant="text" height={100} />
@@ -19,16 +21,16 @@ const Home = () => {
           <Skeleton variant="rectangular" height={300} />
         </Stack>
       ) : (
-        <>
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-        </>
+        <Box p="12px">
+          {posts.map((post) => (
+            <Post
+              {...post}
+              user={users.filter((user) => user.id === post.user_id)[0]}
+            />
+          ))}
+        </Box>
       )}
-    </Box>
+    </div>
   );
 };
 
