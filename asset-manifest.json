@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/social-media/static/css/main.7f0bedf4.css",
-    "main.js": "/social-media/static/js/main.ff4cab90.js",
+    "main.js": "/social-media/static/js/main.812f4666.js",
     "static/js/802.dd7a5c54.chunk.js": "/social-media/static/js/802.dd7a5c54.chunk.js",
     "static/js/983.dcc94e15.chunk.js": "/social-media/static/js/983.dcc94e15.chunk.js",
     "static/js/787.d7317416.chunk.js": "/social-media/static/js/787.d7317416.chunk.js",
@@ -13,7 +13,7 @@
     "static/media/Bahij_TheSansArabic-Light.ttf": "/social-media/static/media/Bahij_TheSansArabic-Light.c041009a5f0dee7db668.ttf",
     "index.html": "/social-media/index.html",
     "main.7f0bedf4.css.map": "/social-media/static/css/main.7f0bedf4.css.map",
-    "main.ff4cab90.js.map": "/social-media/static/js/main.ff4cab90.js.map",
+    "main.812f4666.js.map": "/social-media/static/js/main.812f4666.js.map",
     "802.dd7a5c54.chunk.js.map": "/social-media/static/js/802.dd7a5c54.chunk.js.map",
     "983.dcc94e15.chunk.js.map": "/social-media/static/js/983.dcc94e15.chunk.js.map",
     "787.d7317416.chunk.js.map": "/social-media/static/js/787.d7317416.chunk.js.map",
@@ -21,6 +21,6 @@
   },
   "entrypoints": [
     "static/css/main.7f0bedf4.css",
-    "static/js/main.ff4cab90.js"
+    "static/js/main.812f4666.js"
   ]
 }
