@@ -13,7 +13,7 @@ import {
 const Post = ({ image, text, time, user }) => {
   return (
     <div>
-      <Card sx={{ marginBottom: 10 }}>
+      <Card sx={{ marginBottom: "24px" }}>
         <CardHeader
           avatar={
             <img src={user.image} width={50} height={50} className="rounded-circle" />

@@ -21,7 +21,7 @@ const Home = () => {
           <Skeleton variant="rectangular" height={300} />
         </Stack>
       ) : (
-        <Box p="12px">
+        <Box>
           {posts.map((post) => (
             <Post
               {...post}

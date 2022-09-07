@@ -14,9 +14,12 @@ import {
   MenuItem,
   Avatar,
   Typography,
+  Grid,
+  Toolbar,
 } from "@mui/material";
 import { useLanguage } from "hooks";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Search from "./components/Search";
 import StyledToolbar from "./components/StyledToolbar";
 
@@ -26,57 +29,74 @@ export default function Header() {
 
   return (
     <AppBar position="sticky">
-      <StyledToolbar>
-        <img src="/images/sarah-logo.png" />
-        <Box sx={{ display: { xs: "none", md: "flex" }, width: "40%" }}>
+      <Grid
+        container
+        spacing={2}
+        justifyContent="space-between"
+        alignItems="center"
+        width="100%"
+        mx={0}
+      >
+        <Grid item lg={2} xs={4} px="16px">
+          <img src="/images/sarah-logo.png" className="mw-100" />
+        </Grid>
+        <Grid
+          item
+          lg={6}
+          xs={0}
+          sx={{ display: { xs: "none", lg: "block" } }}
+          px="16px"
+        >
           <Search>
-            <InputBase placeholder="search..." />
+            <InputBase placeholder="search..." className="w-100" />
           </Search>
-        </Box>
-        <Box sx={{ display: { xs: "flex", md: "flex" } }}>
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-          >
-            <Badge badgeContent={4} color="error">
-              <Mail />
-            </Badge>
-          </IconButton>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-          >
-            <Badge badgeContent={17} color="error">
-              <Notifications />
-            </Badge>
-          </IconButton>
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls="demo-positioned-menu"
-            aria-haspopup="true"
-            onClick={setOpen}
-            color="inherit"
-            sx={{ display: { xs: "flex", md: "none" } }}
-          >
-            <SearchIcon />
-          </IconButton>
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls="demo-positioned-menu"
-            aria-haspopup="true"
-            onClick={setOpen}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-        </Box>
-      </StyledToolbar>
+        </Grid>
+        <Grid item lg={4} xs={8} px="16px">
+          <ul className="d-flex justify-content-end align-items-center h-100 m-0 w-100 p-0">
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
+              <Badge badgeContent={4} color="error">
+                <Mail />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
+                <Notifications />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls="demo-positioned-menu"
+              aria-haspopup="true"
+              onClick={setOpen}
+              color="inherit"
+              sx={{ display: { xs: "flex", md: "none" } }}
+            >
+              <SearchIcon />
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls="demo-positioned-menu"
+              aria-haspopup="true"
+              onClick={setOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          </ul>
+        </Grid>
+      </Grid>
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
@@ -94,8 +114,9 @@ export default function Header() {
           top: 45,
         }}
       >
-        <MenuItem>{language.Profile}</MenuItem>
-        <MenuItem>{language.Myaccount}</MenuItem>
+        <MenuItem>
+          <Link to="/profile/1" style={{color: "inherit", textDecoration: "none"}}>{language.Profile}</Link>
+        </MenuItem>
         <MenuItem>{language.Logout}</MenuItem>
       </Menu>
     </AppBar>

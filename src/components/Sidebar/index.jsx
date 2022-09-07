@@ -39,7 +39,7 @@ const Sidebar = () => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
+          <ListItemButton component="a" href="/profile/1">
             <ListItemIcon>
               <AccountBox />
             </ListItemIcon>
