@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/social-media/static/css/main.7f0bedf4.css",
+    "main.js": "/social-media/static/js/main.4824eb8f.js",
+    "static/js/802.5974fc51.chunk.js": "/social-media/static/js/802.5974fc51.chunk.js",
+    "static/js/983.69b79370.chunk.js": "/social-media/static/js/983.69b79370.chunk.js",
+    "static/js/787.1ed0c42c.chunk.js": "/social-media/static/js/787.1ed0c42c.chunk.js",
+    "static/js/965.8edab23f.chunk.js": "/social-media/static/js/965.8edab23f.chunk.js",
+    "static/media/Bahij_TheSansArabic-SemiLight.ttf": "/social-media/static/media/Bahij_TheSansArabic-SemiLight.4068b87176889036681d.ttf",
+    "static/media/Bahij_TheSansArabic-Plain.ttf": "/social-media/static/media/Bahij_TheSansArabic-Plain.ec4ce6c68a5e17d654d7.ttf",
+    "static/media/Bahij_TheSansArabic-Bold.ttf": "/social-media/static/media/Bahij_TheSansArabic-Bold.2a3ef72ca23091bd4704.ttf",
+    "static/media/Bahij_TheSansArabic-SemiBold.ttf": "/social-media/static/media/Bahij_TheSansArabic-SemiBold.e0eb11ed37020a33fd28.ttf",
+    "static/media/Bahij_TheSansArabic-Light.ttf": "/social-media/static/media/Bahij_TheSansArabic-Light.c041009a5f0dee7db668.ttf",
+    "index.html": "/social-media/index.html",
+    "main.7f0bedf4.css.map": "/social-media/static/css/main.7f0bedf4.css.map",
+    "main.4824eb8f.js.map": "/social-media/static/js/main.4824eb8f.js.map",
+    "802.5974fc51.chunk.js.map": "/social-media/static/js/802.5974fc51.chunk.js.map",
+    "983.69b79370.chunk.js.map": "/social-media/static/js/983.69b79370.chunk.js.map",
+    "787.1ed0c42c.chunk.js.map": "/social-media/static/js/787.1ed0c42c.chunk.js.map",
+    "965.8edab23f.chunk.js.map": "/social-media/static/js/965.8edab23f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f0bedf4.css",
+    "static/js/main.4824eb8f.js"
+  ]
+}
