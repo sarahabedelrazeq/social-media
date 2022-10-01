@@ -6,20 +6,8 @@ import { useLanguage } from "hooks";
 import { useSelector } from "react-redux";
 import defTheme from "./theme";
 import "./assets/styles/App.scss";
-import rtlPlugin from "stylis-plugin-rtl";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
-import { prefixer } from "stylis";
-
-// Create rtl cache
-const cacheRtl = createCache({
-  key: "muirtl",
-  stylisPlugins: [prefixer, rtlPlugin],
-});
-
-function RTL(props) {
-  return <CacheProvider value={cacheRtl}>{props.children}</CacheProvider>;
-}
+import RTL from "components/RTL";
+import Auth from "components/Auth";
 
 const routes = [
   {
@@ -28,6 +16,7 @@ const routes = [
     name: "Home",
     component: React.lazy(() => import("pages/Home")),
     layout: true,
+    auth: true,
   },
   {
     path: "/profile/:id",
@@ -35,6 +24,13 @@ const routes = [
     name: "Profile",
     component: React.lazy(() => import("pages/Profile")),
     layout: true,
+    auth: true,
+  },
+  {
+    path: "/login",
+    exact: true,
+    name: "Login",
+    component: React.lazy(() => import("pages/Auth")),
   },
 ];
 
@@ -60,37 +56,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      {language.code === "ar" ? (
-        <RTL>
-          <div id="app">
-            <React.Suspense fallback={<React.Fragment></React.Fragment>}>
-              <Routes basename="/">
-                {routes.map((route, idx) => {
-                  return (
-                    route.component && (
-                      <Route
-                        key={idx}
-                        path={route.path}
-                        exact={route.exact}
-                        name={route.name}
-                        element={
-                          route.layout ? (
-                            <Layout>
-                              <route.component />
-                            </Layout>
-                          ) : (
-                            <route.component />
-                          )
-                        }
-                      />
-                    )
-                  );
-                })}
-              </Routes>
-            </React.Suspense>
-          </div>
-        </RTL>
-      ) : (
+      <RTL rtl={language.code === "ar"}>
         <div id="app">
           <React.Suspense fallback={<React.Fragment></React.Fragment>}>
             <Routes basename="/">
@@ -103,13 +69,15 @@ export default function App() {
                       exact={route.exact}
                       name={route.name}
                       element={
-                        route.layout ? (
-                          <Layout>
+                        <Auth auth={route.auth}>
+                          {route.layout ? (
+                            <Layout>
+                              <route.component />
+                            </Layout>
+                          ) : (
                             <route.component />
-                          </Layout>
-                        ) : (
-                          <route.component />
-                        )
+                          )}
+                        </Auth>
                       }
                     />
                   )
@@ -118,7 +86,7 @@ export default function App() {
             </Routes>
           </React.Suspense>
         </div>
-      )}
+      </RTL>
     </ThemeProvider>
   );
 }

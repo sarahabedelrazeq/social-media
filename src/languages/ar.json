@@ -4,7 +4,6 @@
   "englishName": "Arabic",
   "name": "العربيه",
   "xLang": "English",
-
   "Homepage": "الصفحة الرئيسية",
   "Pages": "الصفحات",
   "Groups": "مجموعات",
@@ -17,5 +16,7 @@
   "OnlineFriends": "الأصدقاء عبر الإنترنت",
   "Myaccount": "حسابي",
   "Logout": "تسجيل خروج",
+  "login": "تسجيل الدخول",
+  "register": "تسجيل",
   "test": "test"
 }

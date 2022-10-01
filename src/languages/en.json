@@ -16,5 +16,7 @@
   "OnlineFriends": "Online Friends",
   "Myaccount": "My account",
   "Logout": "Logout",
+  "login": "Login",
+  "register": "Register",
   "test": "test"
 }
