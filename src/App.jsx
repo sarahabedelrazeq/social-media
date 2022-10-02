@@ -8,6 +8,7 @@ import defTheme from "./theme";
 import "./assets/styles/App.scss";
 import RTL from "components/RTL";
 import Auth from "components/Auth";
+import Fallback from "components/Fallback";
 
 const routes = [
   {
@@ -58,13 +59,19 @@ export default function App() {
     <ThemeProvider theme={darkTheme}>
       <RTL rtl={language.code === "ar"}>
         <div id="app">
-          <React.Suspense fallback={<React.Fragment></React.Fragment>}>
+          <React.Suspense
+            fallback={
+              <div className="vw-100 vh-100">
+                <Fallback />
+              </div>
+            }
+          >
             <Routes basename="/">
-              {routes.map((route, idx) => {
+              {routes.map((route, index) => {
                 return (
                   route.component && (
                     <Route
-                      key={idx}
+                      key={index}
                       path={route.path}
                       exact={route.exact}
                       name={route.name}

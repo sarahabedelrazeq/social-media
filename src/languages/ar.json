@@ -17,6 +17,8 @@
   "Myaccount": "حسابي",
   "Logout": "تسجيل خروج",
   "login": "تسجيل الدخول",
+  "addPost": "Add Post",
   "register": "تسجيل",
+  "registerMessage": "يرجى الدخول إلى حساب البريد الإلكتروني الخاص بك لتأكيد حسابك",
   "test": "test"
 }

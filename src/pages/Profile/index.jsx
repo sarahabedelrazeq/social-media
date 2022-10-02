@@ -34,7 +34,10 @@ export default function Profile() {
               <Box m="-16px" mb={0}>
                 <img src="/images/bg1.jpg" className="w-100" height="300" />
               </Box>
-              <Box marginTop="-110px" className="d-flex justify-content-center mb-3">
+              <Box
+                marginTop="-110px"
+                className="d-flex justify-content-center mb-3"
+              >
                 <Box
                   sx={{
                     padding: "10px",
@@ -58,8 +61,8 @@ export default function Profile() {
               <Box>
                 {posts
                   .filter((post) => post.id === id)
-                  .map((post) => (
-                    <Post {...post} user={user} />
+                  .map((post, index) => (
+                    <Post {...post} user={user} key={index} />
                   ))}
               </Box>
             </Grid>

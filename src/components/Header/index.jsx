@@ -17,6 +17,7 @@ import {
   Grid,
   Toolbar,
 } from "@mui/material";
+import supabase from "helpers/client";
 import { useLanguage } from "hooks";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -26,6 +27,9 @@ import StyledToolbar from "./components/StyledToolbar";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const language = useLanguage();
+  const handleLogout = async () => {
+    let { error } = await supabase.auth.signOut()
+  }
 
   return (
     <AppBar position="sticky">
@@ -115,9 +119,14 @@ export default function Header() {
         }}
       >
         <MenuItem>
-          <Link to="/profile/1" style={{color: "inherit", textDecoration: "none"}}>{language.Profile}</Link>
+          <Link
+            to="/profile/1"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            {language.Profile}
+          </Link>
         </MenuItem>
-        <MenuItem>{language.Logout}</MenuItem>
+        <MenuItem onClick={handleLogout}>{language.Logout}</MenuItem>
       </Menu>
     </AppBar>
   );

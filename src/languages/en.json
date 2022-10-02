@@ -18,5 +18,7 @@
   "Logout": "Logout",
   "login": "Login",
   "register": "Register",
+  "addPost": "Add Post",
+  "registerMessage": "Please go to your email account to confirm your account",
   "test": "test"
 }

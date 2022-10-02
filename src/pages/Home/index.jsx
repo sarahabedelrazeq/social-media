@@ -22,10 +22,11 @@ const Home = () => {
         </Stack>
       ) : (
         <Box>
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <Post
               {...post}
               user={users.filter((user) => user.id === post.user_id)[0]}
+              key={index}
             />
           ))}
         </Box>

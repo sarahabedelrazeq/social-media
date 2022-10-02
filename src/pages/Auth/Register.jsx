@@ -8,17 +8,26 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useLanguage } from "hooks";
+import supabase from "helpers/client";
+import { Alert } from "@mui/material";
 
 export default function Register() {
   const language = useLanguage();
+  const [error, setError] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    let { user, error } = await supabase.auth.signUp({
       email: data.get("email"),
       password: data.get("password"),
     });
+    if (error && error.message) setError(error.message);
+    else {
+      //console.log("user :>> ", user);
+      setMessage(language.registerMessage);
+    }
   };
 
   return (
@@ -35,6 +44,8 @@ export default function Register() {
         {language.register}
       </Typography>
       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        {error !== "" && <Alert severity="error">{error}</Alert>}
+        {message !== "" && <Alert severity="success">{message}</Alert>}
         <TextField
           margin="normal"
           required

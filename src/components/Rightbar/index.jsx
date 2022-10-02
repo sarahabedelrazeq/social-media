@@ -28,8 +28,8 @@ const Rightbar = () => {
       </div>
       <div className="d-flex w-100 justify-content-center">
         <AvatarGroup max={7}>
-          {users.map((user) => (
-            <Link to={`/profile/${user.id}`}>
+          {users.map((user, index) => (
+            <Link to={`/profile/${user.id}`} key={index}>
               <Avatar alt={user.name} src={user.image} />
             </Link>
           ))}
