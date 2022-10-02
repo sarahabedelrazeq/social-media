@@ -5,8 +5,6 @@ import TabPanel from "components/TabPanel";
 import { useLanguage } from "hooks";
 import Login from "./Login";
 import Register from "./Register";
-import supabase from "helpers/client";
-import { navigate } from "helpers";
 
 const theme = createTheme();
 
@@ -20,12 +18,6 @@ function a11yProps(index) {
 export default function Auth() {
   const language = useLanguage();
   const [value, setValue] = React.useState(0);
-
-  React.useEffect(() => {
-    const user = supabase.auth.user();
-    if (user && user.id) navigate("/");
-
-  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

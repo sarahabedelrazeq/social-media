@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import { useLanguage } from "hooks";
 import supabase from "helpers/client";
 import { Alert } from "@mui/material";
+import { navigate } from "helpers";
 
 export default function Login() {
   const language = useLanguage();
@@ -22,9 +23,10 @@ export default function Login() {
       email: data.get("email"),
       password: data.get("password"),
     });
-
     if (error && error.message) setError(error.message);
-    //else console.log("user :>> ", user);
+    else if(!error){
+      navigate("/");
+    }
   };
 
   return (

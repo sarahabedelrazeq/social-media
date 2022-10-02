@@ -1,16 +1,22 @@
 import Fallback from "components/Fallback";
+import { navigate } from "helpers";
 import supabase from "helpers/client";
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-export default function Auth({ children, auth }) {
+export default function Auth({ children, auth, noAuth }) {
   const [userId, setUserId] = React.useState(null);
+  const user = supabase.auth.user();
 
   React.useEffect(() => {
-    const user = supabase.auth.user();
-    if (user && user.id) setUserId(user.id);
-    else setUserId("");
-  }, []);
+    console.log("user", user);
+    if (user && user.id) {
+      setUserId(user.id);
+      if (noAuth) navigate("/");
+    } else {
+      setUserId("");
+    }
+  }, [user, noAuth]);
 
   if (userId === null)
     return (

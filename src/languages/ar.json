@@ -17,8 +17,11 @@
   "Myaccount": "حسابي",
   "Logout": "تسجيل خروج",
   "login": "تسجيل الدخول",
-  "addPost": "Add Post",
+  "addPost": "اضف منشور",
   "register": "تسجيل",
   "registerMessage": "يرجى الدخول إلى حساب البريد الإلكتروني الخاص بك لتأكيد حسابك",
+  "image": "صورة",
+  "description": "الوصف",
+  "title": "العنوان",
   "test": "test"
 }

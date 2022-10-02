@@ -17,6 +17,8 @@ import {
   Grid,
   Toolbar,
 } from "@mui/material";
+import AddPost from "components/AddPost";
+import { navigate } from "helpers";
 import supabase from "helpers/client";
 import { useLanguage } from "hooks";
 import React, { useState } from "react";
@@ -28,8 +30,11 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const language = useLanguage();
   const handleLogout = async () => {
-    let { error } = await supabase.auth.signOut()
-  }
+    let { error } = await supabase.auth.signOut();
+    if(!error){
+      navigate("/login");
+    }
+  };
 
   return (
     <AppBar position="sticky">
@@ -125,6 +130,9 @@ export default function Header() {
           >
             {language.Profile}
           </Link>
+        </MenuItem>
+        <MenuItem>
+          <AddPost>{language.addPost}</AddPost>
         </MenuItem>
         <MenuItem onClick={handleLogout}>{language.Logout}</MenuItem>
       </Menu>

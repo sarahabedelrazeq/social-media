@@ -20,5 +20,8 @@
   "register": "Register",
   "addPost": "Add Post",
   "registerMessage": "Please go to your email account to confirm your account",
+  "image": "image",
+  "description": "description",
+  "title": "title",
   "test": "test"
 }

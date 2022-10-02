@@ -32,6 +32,8 @@ const routes = [
     exact: true,
     name: "Login",
     component: React.lazy(() => import("pages/Auth")),
+    noAuth: true,
+
   },
 ];
 
@@ -76,7 +78,7 @@ export default function App() {
                       exact={route.exact}
                       name={route.name}
                       element={
-                        <Auth auth={route.auth}>
+                        <Auth auth={route.auth} noAuth={route.noAuth} >
                           {route.layout ? (
                             <Layout>
                               <route.component />
