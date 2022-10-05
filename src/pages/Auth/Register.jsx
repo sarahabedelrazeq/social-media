@@ -25,7 +25,6 @@ export default function Register() {
     });
     if (error && error.message) setError(error.message);
     else {
-      //console.log("user :>> ", user);
       setMessage(language.registerMessage);
     }
   };

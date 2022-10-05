@@ -31,10 +31,13 @@ export default function AddPost({ children }) {
   const handleAddPost = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    const { data: post, error } = await supabase
-      .from("posts")
-      .insert([{ some_column: "someValue", other_column: "otherValue" }]);
+    const { data: post, error } = await supabase.from("posts").insert([
+      {
+        text: data.get("text"),
+        image: data.get("image"),
+        user_id: 1,
+      },
+    ]);
 
     if (error && error.message) setError(error.message);
   };
@@ -54,9 +57,7 @@ export default function AddPost({ children }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={style}
-        >
+        <Box sx={style}>
           <Typography component="h1" variant="h5">
             {language.addPost}
           </Typography>
@@ -72,22 +73,28 @@ export default function AddPost({ children }) {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="text"
+              label="text"
+              name="text"
               autoFocus
             />
+
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              name="image"
+              label="image"
+              type="file"
+              id="image"
+              onChange={async ({ target: { files } }) => {
+                const avatarFile = files[0];
+                const { data, error } = await supabase.storage
+                  .from("posts")
+                  .upload("public/post2.png", avatarFile);
+              }}
             />
+
             <Button
               type="submit"
               fullWidth

@@ -9,7 +9,6 @@ export default function Auth({ children, auth, noAuth }) {
   const user = supabase.auth.user();
 
   React.useEffect(() => {
-    console.log("user", user);
     if (user && user.id) {
       setUserId(user.id);
       if (noAuth) navigate("/");
