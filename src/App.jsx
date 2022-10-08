@@ -3,12 +3,14 @@ import React from "react";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { useLanguage } from "hooks";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import defTheme from "./theme";
 import "./assets/styles/App.scss";
 import RTL from "components/RTL";
 import Auth from "components/Auth";
 import Fallback from "components/Fallback";
+import { client } from "helpers";
+import { setUser } from "store/auth";
 
 const routes = [
   {
@@ -37,7 +39,9 @@ const routes = [
 ];
 
 export default function App() {
+  const [loading, setLoading] = React.useState(false);
   const language = useLanguage();
+  const dispatch = useDispatch()
   const { theme } = useSelector(({ app }) => app);
 
   React.useLayoutEffect(() => {
@@ -54,6 +58,25 @@ export default function App() {
       mode: theme,
     },
   });
+
+  const getUserData = React.useCallback(async (id) => {
+    setLoading(true);
+    let { data: userData, error } = await client
+      .from("userData")
+      .select(`*`)
+      .eq("user_id", id);
+    setLoading(false);
+    if (!error)
+    dispatch(setUser(userData[0]))
+  }, []);
+
+  React.useEffect(() => {
+    const user = client.auth.user();
+    if(user)
+    getUserData(user.id);
+    else
+    dispatch(setUser({}))
+  }, [getUserData]);
 
   return (
     <ThemeProvider theme={darkTheme}>

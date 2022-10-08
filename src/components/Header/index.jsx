@@ -22,6 +22,7 @@ import { navigate } from "helpers";
 import supabase from "helpers/client";
 import { useLanguage } from "hooks";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Search from "./components/Search";
 import StyledToolbar from "./components/StyledToolbar";
@@ -29,6 +30,7 @@ import StyledToolbar from "./components/StyledToolbar";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const language = useLanguage();
+  const user = useSelector(({auth}) => auth.user)
   const handleLogout = async () => {
     let { error } = await supabase.auth.signOut();
     if(!error){
@@ -125,7 +127,7 @@ export default function Header() {
       >
         <MenuItem>
           <Link
-            to="/profile/1"
+            to={"/profile/" + user.id}
             style={{ color: "inherit", textDecoration: "none" }}
           >
             {language.Profile}
