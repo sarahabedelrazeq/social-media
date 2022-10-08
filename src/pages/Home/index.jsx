@@ -1,9 +1,6 @@
 import { Box, Stack, Skeleton } from "@mui/material";
 import Post from "components/Post";
 import React, { useState } from "react";
-import posts from "data/posts.json";
-import users from "data/users.json";
-import { async } from "rxjs";
 import { client } from "helpers";
 
 const Home = () => {

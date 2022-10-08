@@ -1,12 +1,11 @@
-import { Skeleton, Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Skeleton, Grid, Typography, Box } from "@mui/material";
 import React, { useState } from "react";
 import Post from "components/Post";
 import { useParams } from "react-router-dom";
 import { client } from "helpers";
 
 export default function Profile() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
@@ -56,7 +55,7 @@ export default function Profile() {
           <Grid>
             <Grid>
               <Box m="-16px" mb={0}>
-                <img src="/images/bg1.jpg" className="w-100" height="300" />
+                <img src="/images/bg1.jpg" alt={user.name} className="w-100" height="300" />
               </Box>
               <Box
                 marginTop="-110px"
@@ -71,6 +70,7 @@ export default function Profile() {
                 >
                   <img
                     src={user.image}
+                    alt={user.name}
                     width="200"
                     height="200"
                     className="rounded-circle"
