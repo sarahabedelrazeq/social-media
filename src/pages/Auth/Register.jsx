@@ -25,7 +25,18 @@ export default function Register() {
     });
     if (error && error.message) setError(error.message);
     else {
+      const { data: userData, error: userDataError  } = await supabase.from("userData").insert([
+        {
+          image:
+            "https://jhdpgjjcbrlbvddzodju.supabase.co/storage/v1/object/public/users/default_user%20(1).png",
+          user_id: user.id,
+          name: data.get("name")
+        },
+      ]);
+      if (userDataError && userDataError.message) setError(userDataError.message);
+
       setMessage(language.registerMessage);
+
     }
   };
 
@@ -45,6 +56,16 @@ export default function Register() {
       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
         {error !== "" && <Alert severity="error">{error}</Alert>}
         {message !== "" && <Alert severity="success">{message}</Alert>}
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="name"
+          label="Name"
+          name="name"
+          autoComplete="name"
+          autoFocus
+        />
         <TextField
           margin="normal"
           required

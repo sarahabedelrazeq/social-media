@@ -3,13 +3,23 @@ import Post from "components/Post";
 import React, { useState } from "react";
 import posts from "data/posts.json";
 import users from "data/users.json";
+import { async } from "rxjs";
+import { client } from "helpers";
 
 const Home = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, [3000]);
+  const getPosts = React.useCallback(async () => {
+    setLoading(true)
+    let { data: posts, error } = await client.from("posts").select(`*, userData(*)`)
+    setLoading(false)
+    if (!error) setPosts(posts);
+  }, []);
+
+  React.useEffect(() => {
+    getPosts();
+  }, [getPosts]);
 
   return (
     <div>
@@ -25,7 +35,7 @@ const Home = () => {
           {posts.map((post, index) => (
             <Post
               {...post}
-              user={users.filter((user) => user.id === post.user_id)[0]}
+              user={post?.userData}
               key={index}
             />
           ))}

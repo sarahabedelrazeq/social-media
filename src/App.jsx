@@ -1,6 +1,6 @@
 import Layout from "components/Layout";
 import React from "react";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { useLanguage } from "hooks";
 import { useSelector } from "react-redux";
@@ -33,20 +33,18 @@ const routes = [
     name: "Login",
     component: React.lazy(() => import("pages/Auth")),
     noAuth: true,
-
   },
 ];
 
 export default function App() {
   const language = useLanguage();
-  const { color, theme } = useSelector(({ app }) => app);
+  const { theme } = useSelector(({ app }) => app);
 
   React.useLayoutEffect(() => {
     document.documentElement.setAttribute("lang", language.code);
     document.documentElement.setAttribute("dir", language.direction);
     document.documentElement.setAttribute("class", "theme-" + theme);
-    document.querySelector(":root").style.setProperty("--color", color);
-  }, [language, theme, color]);
+  }, [language, theme]);
 
   const darkTheme = createTheme({
     direction: language.direction,
@@ -59,6 +57,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
       <RTL rtl={language.code === "ar"}>
         <div id="app">
           <React.Suspense
@@ -78,7 +77,7 @@ export default function App() {
                       exact={route.exact}
                       name={route.name}
                       element={
-                        <Auth auth={route.auth} noAuth={route.noAuth} >
+                        <Auth auth={route.auth} noAuth={route.noAuth}>
                           {route.layout ? (
                             <Layout>
                               <route.component />
@@ -99,6 +98,3 @@ export default function App() {
     </ThemeProvider>
   );
 }
-
-
-

@@ -1,19 +1,44 @@
 import { Stack, Skeleton, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import posts from "data/posts.json";
 import React, { useState } from "react";
 import users from "data/users.json";
 import Post from "components/Post";
 import { useParams } from "react-router-dom";
+import { client } from "helpers";
 
 export default function Profile() {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const user = users.filter((user) => user.id === id)[0];
+  const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState([]);
 
-  setTimeout(() => {
+  const getPosts = React.useCallback(async (id) => {
+    setLoading(true);
+    let { data: posts, error } = await client
+      .from("posts")
+      .select(`*`)
+      .eq("user_id", id);
+
     setLoading(false);
-  }, [3000]);
+    if (!error) setPosts(posts);
+  }, []);
+
+  const getUserData = React.useCallback(async (id) => {
+    setLoading(true);
+    let { data: userData, error } = await client
+      .from("userData")
+      .select(`*`)
+      .eq("id", id);
+    setLoading(false);
+    if (!error) setUser(userData[0]);
+
+    getPosts(userData[0]?.id);
+  }, []);
+
+  React.useEffect(() => {
+    getUserData(id);
+    getPosts(id);
+  }, [getUserData, getPosts]);
 
   return (
     <div id="profile-page" className="page-container">
@@ -59,11 +84,9 @@ export default function Profile() {
                 </Typography>
               </Box>
               <Box>
-                {posts
-                  .filter((post) => post.id === id)
-                  .map((post, index) => (
-                    <Post {...post} user={user} key={index} />
-                  ))}
+                {posts.map((post, index) => (
+                  <Post {...post} user={user} key={index} />
+                ))}
               </Box>
             </Grid>
           </Grid>

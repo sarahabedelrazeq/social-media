@@ -24,7 +24,7 @@ export default function Login() {
       password: data.get("password"),
     });
     if (error && error.message) setError(error.message);
-    else if(!error){
+    else if (!error) {
       navigate("/");
     }
   };
