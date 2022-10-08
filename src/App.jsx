@@ -41,7 +41,7 @@ const routes = [
 export default function App() {
   const [loading, setLoading] = React.useState(false);
   const language = useLanguage();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { theme } = useSelector(({ app }) => app);
 
   React.useLayoutEffect(() => {
@@ -59,64 +59,70 @@ export default function App() {
     },
   });
 
-  const getUserData = React.useCallback(async (id) => {
-    setLoading(true);
-    let { data: userData, error } = await client
-      .from("userData")
-      .select(`*`)
-      .eq("user_id", id);
-    setLoading(false);
-    if (!error)
-    dispatch(setUser(userData[0]))
-  }, []);
+  const getUserData = React.useCallback(
+    async (id) => {
+      setLoading(true);
+      let { data: userData, error } = await client
+        .from("userData")
+        .select(`*`)
+        .eq("user_id", id);
+      setLoading(false);
+      if (!error) dispatch(setUser(userData[0]));
+    },
+    [dispatch]
+  );
 
   React.useEffect(() => {
     const user = client.auth.user();
-    if(user)
-    getUserData(user.id);
-    else
-    dispatch(setUser({}))
-  }, [getUserData]);
+    if (user) getUserData(user.id);
+    else dispatch(setUser({}));
+  }, [dispatch, getUserData]);
 
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <RTL rtl={language.code === "ar"}>
-        <div id="app">
-          <React.Suspense
-            fallback={
-              <div className="vw-100 vh-100">
-                <Fallback />
-              </div>
-            }
-          >
-            <Routes basename="/">
-              {routes.map((route, index) => {
-                return (
-                  route.component && (
-                    <Route
-                      key={index}
-                      path={route.path}
-                      exact={route.exact}
-                      name={route.name}
-                      element={
-                        <Auth auth={route.auth} noAuth={route.noAuth}>
-                          {route.layout ? (
-                            <Layout>
+        {loading ? (
+          <div className="vw-100 vh-100">
+            <Fallback />
+          </div>
+        ) : (
+          <div id="app">
+            <React.Suspense
+              fallback={
+                <div className="vw-100 vh-100">
+                  <Fallback />
+                </div>
+              }
+            >
+              <Routes>
+                {routes.map((route, index) => {
+                  return (
+                    route.component && (
+                      <Route
+                        key={index}
+                        path={route.path}
+                        exact={route.exact}
+                        name={route.name}
+                        element={
+                          <Auth auth={route.auth} noAuth={route.noAuth}>
+                            {route.layout ? (
+                              <Layout>
+                                <route.component />
+                              </Layout>
+                            ) : (
                               <route.component />
-                            </Layout>
-                          ) : (
-                            <route.component />
-                          )}
-                        </Auth>
-                      }
-                    />
-                  )
-                );
-              })}
-            </Routes>
-          </React.Suspense>
-        </div>
+                            )}
+                          </Auth>
+                        }
+                      />
+                    )
+                  );
+                })}
+              </Routes>
+            </React.Suspense>
+          </div>
+        )}
       </RTL>
     </ThemeProvider>
   );

@@ -14,7 +14,7 @@ root.render(
   <HistoryRouter history={history}>
     <PersistGate loading={null} persistor={persistor}>
       <Provider store={store}>
-            <App />
+        <App />
       </Provider>
     </PersistGate>
   </HistoryRouter>
