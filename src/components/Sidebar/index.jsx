@@ -32,65 +32,38 @@ const Sidebar = () => {
     <Box position="fixed">
       <List>
         <ListItem disablePadding>
-          <Link to="/">
-            <ListItemButton component="a" href="/">
-              <ListItemIcon>
-                <Home />
-              </ListItemIcon>
-              <ListItemText primary={language.Homepage} />
-            </ListItemButton>
-          </Link>
+          <ListItemButton as={Link} to="/">
+            <ListItemIcon>
+              <Home />
+            </ListItemIcon>
+            <ListItemText
+              primary={language.Homepage}
+              sx={{ color: "text.primary" }}
+            />
+          </ListItemButton>
         </ListItem>
+
         <ListItem disablePadding>
-          <ListItemButton component="a" href="/profile/1">
+          <ListItemButton as={Link} to="/profile/1">
             <ListItemIcon>
               <AccountBox />
             </ListItemIcon>
-            <ListItemText primary={language.Profile} />
-          </ListItemButton>
-        </ListItem>
-        {/* <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
-            <ListItemIcon>
-              <Article />
-            </ListItemIcon>
-            <ListItemText primary={language.Pages} />
+            <ListItemText
+              primary={language.Profile}
+              sx={{ color: "text.primary" }}
+            />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
-            <ListItemIcon>
-              <Group />
-            </ListItemIcon>
-            <ListItemText primary={language.Groups} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
-            <ListItemIcon>
-              <Storefront />
-            </ListItemIcon>
-            <ListItemText primary={language.Marketplace} />
-          </ListItemButton>
-        </ListItem> */}
-        <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
+          <ListItemButton>
             <ListItemIcon>
               <Person />
             </ListItemIcon>
             <ListItemText primary={language.Friends} />
           </ListItemButton>
         </ListItem>
-        {/* <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
-            <ListItemIcon>
-              <Settings />
-            </ListItemIcon>
-            <ListItemText primary={language.Settings} />
-          </ListItemButton>
-        </ListItem> */}
         <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
+          <ListItemButton>
             <ListItemIcon>
               <ModeNight />
             </ListItemIcon>
@@ -98,7 +71,7 @@ const Sidebar = () => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
+          <ListItemButton>
             <ListItemIcon>
               <Language />
             </ListItemIcon>
