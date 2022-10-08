@@ -29,10 +29,7 @@ export default function Profile() {
       .select(`*`)
       .eq("id", id);
     setLoading(false);
-    if (userData && userData.length > 0) {
-      setUser(userData[0]);
-      getPosts(userData[0].id);
-    }
+    if (userData && userData.length > 0) setUser(userData[0]);
   }, []);
 
   React.useEffect(() => {
