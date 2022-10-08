@@ -21,6 +21,7 @@ import {
 import { useLanguage } from "hooks";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { switchLanguage, switchTheme } from "store/app";
 
 const Sidebar = () => {
@@ -31,12 +32,14 @@ const Sidebar = () => {
     <Box position="fixed">
       <List>
         <ListItem disablePadding>
-          <ListItemButton component="a" href="#home">
-            <ListItemIcon>
-              <Home />
-            </ListItemIcon>
-            <ListItemText primary={language.Homepage} />
-          </ListItemButton>
+          <Link to="/">
+            <ListItemButton component="a" href="/">
+              <ListItemIcon>
+                <Home />
+              </ListItemIcon>
+              <ListItemText primary={language.Homepage} />
+            </ListItemButton>
+          </Link>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton component="a" href="/profile/1">
