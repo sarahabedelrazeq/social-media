@@ -67,7 +67,7 @@ const Rightbar = () => {
           {language.LatestConversations}
         </Typography>
       </div>
-      <div>
+      {/* <div>
         <List
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
         >
@@ -140,7 +140,7 @@ const Rightbar = () => {
             />
           </ListItem>
         </List>
-      </div>
+      </div> */}
     </Box>
   );
 };
