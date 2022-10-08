@@ -1,7 +1,6 @@
-import { Stack, Skeleton, Grid, Typography } from "@mui/material";
+import { Skeleton, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import users from "data/users.json";
 import Post from "components/Post";
 import { useParams } from "react-router-dom";
 import { client } from "helpers";
@@ -10,14 +9,14 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
 
   const getPosts = React.useCallback(async (id) => {
     setLoading(true);
     let { data: posts, error } = await client
       .from("posts")
-      ?.select(`*`)
-      ?.eq("user_id", id);
+      .select(`*`)
+      .eq("user_id", id);
 
     setLoading(false);
     if (!error) setPosts(posts);
@@ -27,23 +26,26 @@ export default function Profile() {
     setLoading(true);
     let { data: userData, error } = await client
       .from("userData")
-      ?.select(`*`)
-      ?.eq("id", id);
+      .select(`*`)
+      .eq("id", id);
     setLoading(false);
-    if (!error) setUser(userData[0]);
-
-    getPosts(userData[0]?.id);
+    if (userData && userData.length > 0) {
+      setUser(userData[0]);
+      getPosts(userData[0].id);
+    }
   }, []);
 
   React.useEffect(() => {
-    getUserData(id);
-    getPosts(id);
-  }, [getUserData, getPosts]);
+    if (id) {
+      getUserData(id);
+      getPosts(id);
+    }
+  }, [getUserData, getPosts, id]);
 
   return (
     <div id="profile-page" className="page-container">
       <sections>
-        {loading || !user ? (
+        {loading || !user.id ? (
           <Grid>
             <Skeleton variant="text" height={300} marginBottom="200px" />
             <Skeleton variant="text" height={20} />
