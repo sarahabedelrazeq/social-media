@@ -16,8 +16,8 @@ export default function Profile() {
     setLoading(true);
     let { data: posts, error } = await client
       .from("posts")
-      .select(`*`)
-      .eq("user_id", id);
+      ?.select(`*`)
+      ?.eq("user_id", id);
 
     setLoading(false);
     if (!error) setPosts(posts);
@@ -27,8 +27,8 @@ export default function Profile() {
     setLoading(true);
     let { data: userData, error } = await client
       .from("userData")
-      .select(`*`)
-      .eq("id", id);
+      ?.select(`*`)
+      ?.eq("id", id);
     setLoading(false);
     if (!error) setUser(userData[0]);
 
@@ -43,7 +43,7 @@ export default function Profile() {
   return (
     <div id="profile-page" className="page-container">
       <sections>
-        {loading ? (
+        {loading || !user ? (
           <Grid>
             <Skeleton variant="text" height={300} marginBottom="200px" />
             <Skeleton variant="text" height={20} />
