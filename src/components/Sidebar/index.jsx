@@ -20,13 +20,14 @@ import {
 } from "@mui/material";
 import { useLanguage } from "hooks";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { switchLanguage, switchTheme } from "store/app";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const language = useLanguage();
+  const user = useSelector(({ auth }) => auth.user);
 
   return (
     <Box position="fixed">
@@ -43,17 +44,19 @@ const Sidebar = () => {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding>
-          <ListItemButton as={Link} to="/profile/1">
-            <ListItemIcon>
-              <AccountBox />
-            </ListItemIcon>
-            <ListItemText
-              primary={language.Profile}
-              sx={{ color: "text.primary" }}
-            />
-          </ListItemButton>
-        </ListItem>
+        {user && user.id && (
+          <ListItem disablePadding>
+            <ListItemButton as={Link} to={`/profile/${user.id}`}>
+              <ListItemIcon>
+                <AccountBox />
+              </ListItemIcon>
+              <ListItemText
+                primary={language.Profile}
+                sx={{ color: "text.primary" }}
+              />
+            </ListItemButton>
+          </ListItem>
+        )}
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>

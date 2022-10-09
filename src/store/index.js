@@ -15,12 +15,13 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import { createFilter } from "redux-persist-transform-filter";
 import app from "./app";
 import auth from "./auth";
+import user from "./user";
 import { PERSIST_KEY } from "constants";
 
 
 const persistConfig = {
   key: PERSIST_KEY,
-  whitelist: ["app", "auth"],
+  whitelist: ["app", "auth", "user"],
   storage,
   transforms: [
   ],
@@ -30,6 +31,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   app,
   auth,
+  user
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

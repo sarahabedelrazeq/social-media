@@ -1,22 +1,16 @@
 import { Box, Stack, Skeleton } from "@mui/material";
 import Post from "components/Post";
-import React, { useState } from "react";
-import { client } from "helpers";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getFeed } from "store/user";
 
 const Home = () => {
-  const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState([]);
-
-  const getPosts = React.useCallback(async () => {
-    setLoading(true)
-    let { data: posts, error } = await client.from("posts").select(`*, userData(*)`)
-    setLoading(false)
-    if (!error) setPosts(posts);
-  }, []);
+  const dispatch = useDispatch();
+  const { loading, feed } = useSelector(({ user }) => user);
 
   React.useEffect(() => {
-    getPosts();
-  }, [getPosts]);
+    dispatch(getFeed());
+  }, []);
 
   return (
     <div>
@@ -29,12 +23,8 @@ const Home = () => {
         </Stack>
       ) : (
         <Box>
-          {posts.map((post, index) => (
-            <Post
-              {...post}
-              user={post?.userData}
-              key={index}
-            />
+          {feed.map((post, index) => (
+            <Post {...post} user={post?.userData} key={index} />
           ))}
         </Box>
       )}

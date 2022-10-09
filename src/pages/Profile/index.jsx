@@ -1,14 +1,14 @@
 import { Skeleton, Grid, Typography, Box } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import Post from "components/Post";
 import { useParams } from "react-router-dom";
 import { client } from "helpers";
 
 export default function Profile() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = React.useState(false);
   const { id } = useParams();
-  const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState({});
+  const [posts, setPosts] = React.useState([]);
+  const [user, setUser] = React.useState({});
 
   const getPosts = React.useCallback(async (id) => {
     setLoading(true);

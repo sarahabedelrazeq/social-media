@@ -21,19 +21,19 @@ import AddPost from "components/AddPost";
 import { navigate } from "helpers";
 import supabase from "helpers/client";
 import { useLanguage } from "hooks";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Search from "./components/Search";
 import StyledToolbar from "./components/StyledToolbar";
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const language = useLanguage();
-  const user = useSelector(({auth}) => auth.user)
+  const user = useSelector(({ auth }) => auth.user);
   const handleLogout = async () => {
     let { error } = await supabase.auth.signOut();
-    if(!error){
+    if (!error) {
       navigate("/login");
     }
   };
@@ -125,14 +125,17 @@ export default function Header() {
           top: 45,
         }}
       >
-        <MenuItem>
-          <Link
-            to={"/profile/" + user.id}
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            {language.Profile}
-          </Link>
-        </MenuItem>
+        {user && user.id && (
+          <MenuItem>
+            <Link
+               to={`/profile/${user.id}`}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              {language.Profile}
+            </Link>
+          </MenuItem>
+        )}
+
         <MenuItem>
           <AddPost>{language.addPost}</AddPost>
         </MenuItem>

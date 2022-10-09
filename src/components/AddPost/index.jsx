@@ -10,6 +10,8 @@ import supabase from "helpers/client";
 import { useLanguage } from "hooks";
 import React from "react";
 import moment from "moment";
+import { getFeed } from "store/user";
+import { useDispatch } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -24,6 +26,7 @@ const style = {
 };
 
 export default function AddPost({ children }) {
+  const dispatch = useDispatch();
   const language = useLanguage();
   const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState("");
@@ -49,6 +52,7 @@ export default function AddPost({ children }) {
       },
     ]);
     setLoading(false);
+    dispatch(getFeed());
 
     if (error && error.message) setError(error.message);
     else if (post) setOpen(false);
