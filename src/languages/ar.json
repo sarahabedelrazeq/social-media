@@ -23,5 +23,7 @@
   "image": "صورة",
   "description": "الوصف",
   "title": "العنوان",
+  "followFriends": "تابع الأصدقاء",
+  "noPosts": "لا يوجد منشورات لعرضها",
   "test": "test"
 }

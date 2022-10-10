@@ -11,7 +11,9 @@ import { useLanguage } from "hooks";
 import React from "react";
 import moment from "moment";
 import { getFeed } from "store/user";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { LoadingButton } from "@mui/lab";
+import { Add, Save } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -32,6 +34,7 @@ export default function AddPost({ children }) {
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [image, setImage] = React.useState(false);
+  const user = useSelector(({ auth }) => auth.user);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -48,7 +51,7 @@ export default function AddPost({ children }) {
           ? "https://jhdpgjjcbrlbvddzodju.supabase.co/storage/v1/object/public/" +
             image
           : "",
-        user_id: 1,
+        user_id: user.id,
       },
     ]);
     setLoading(false);
@@ -92,7 +95,7 @@ export default function AddPost({ children }) {
           <Box
             component="form"
             noValidate
-            onSubmit={handleAddPost}
+            onSubmit={loading ? () => {} : handleAddPost}
             sx={{ mt: 1 }}
           >
             {error !== "" && <Alert severity="error">{error}</Alert>}
@@ -117,16 +120,17 @@ export default function AddPost({ children }) {
               id="image"
               onChange={uploadImage}
             />
-            {!loading && (
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                {language.addPost}
-              </Button>
-            )}
+            <LoadingButton
+              loading={loading}
+              loadingPosition="end"
+              endIcon={<Add />}
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              {language.addPost}
+            </LoadingButton>
           </Box>
         </Box>
       </Modal>

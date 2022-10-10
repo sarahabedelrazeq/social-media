@@ -16,7 +16,12 @@ const Post = ({ image, text, time, user }) => {
       <Card sx={{ marginBottom: "24px" }}>
         <CardHeader
           avatar={
-            <img src={user.image} width={50} height={50} className="rounded-circle" />
+            <img
+              src={user.image}
+              width={50}
+              height={50}
+              className="rounded-circle"
+            />
           }
           action={
             <IconButton aria-label="settings">
@@ -26,12 +31,15 @@ const Post = ({ image, text, time, user }) => {
           title={user.name}
           subheader={time}
         />
-        <CardMedia
-          component="img"
-          height="20%"
-          image={image}
-          alt="Paella dish"
-        />
+        {image && (
+          <CardMedia
+            component="img"
+            height="20%"
+            image={image}
+            alt="Paella dish"
+          />
+        )}
+
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             {text}

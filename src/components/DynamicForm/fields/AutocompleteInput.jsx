@@ -1,4 +1,4 @@
-import Autocomplete from "@mui/material/Autocomplete";
+import { Autocomplete } from "@mui/material";
 import classNames from "classnames";
 import React from "react";
 import { Col, Form, Row } from "react-bootstrap";

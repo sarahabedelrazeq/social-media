@@ -1,15 +1,17 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import {
+  Alert,
+  Link,
+  Checkbox,
+  Box,
+  FormControlLabel,
+  TextField,
+  Button,
+  Typography,
+  Grid,
+} from "@mui/material";
 import { useLanguage } from "hooks";
 import supabase from "helpers/client";
-import { Alert } from "@mui/material";
 
 export default function Register() {
   const language = useLanguage();
@@ -25,18 +27,20 @@ export default function Register() {
     });
     if (error && error.message) setError(error.message);
     else {
-      const { data: userData, error: userDataError  } = await supabase.from("userData").insert([
-        {
-          image:
-            "https://jhdpgjjcbrlbvddzodju.supabase.co/storage/v1/object/public/users/default_user%20(1).png",
-          user_id: user.id,
-          name: data.get("name")
-        },
-      ]);
-      if (userDataError && userDataError.message) setError(userDataError.message);
+      const { data: userData, error: userDataError } = await supabase
+        .from("userData")
+        .insert([
+          {
+            image:
+              "https://jhdpgjjcbrlbvddzodju.supabase.co/storage/v1/object/public/users/default_user%20(1).png",
+            user_id: user.id,
+            name: data.get("name"),
+          },
+        ]);
+      if (userDataError && userDataError.message)
+        setError(userDataError.message);
 
       setMessage(language.registerMessage);
-
     }
   };
 

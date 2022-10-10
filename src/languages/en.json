@@ -23,5 +23,7 @@
   "image": "image",
   "description": "description",
   "title": "title",
+  "followFriends": "Follow Friends",
+  "noPosts": "there are no posts to show",
   "test": "test"
 }

@@ -8,14 +8,10 @@ import {
   AppBar,
   IconButton,
   Badge,
-  Box,
   InputBase,
   Menu,
   MenuItem,
-  Avatar,
-  Typography,
   Grid,
-  Toolbar,
 } from "@mui/material";
 import AddPost from "components/AddPost";
 import { navigate } from "helpers";
