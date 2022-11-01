@@ -56,11 +56,11 @@ export default function Header() {
         >
           <form
             onSubmit={(event) => {
-              event.preventDefault()
+              event.preventDefault();
               const data = new FormData(event.currentTarget);
-              const search = data.get("search");
-              if(search)
-              navigate(`/search/${search}`)
+              let search = data.get("search");
+              if (search && search.trim() !== "")
+                navigate(`/search/${search.replace(/^\s+|\s+/gm, " ").trim()}`);
             }}
           >
             <Search>
@@ -69,6 +69,7 @@ export default function Header() {
                 className="w-100"
                 name="search"
                 defaultValue={search || ""}
+                key={search}
               />
             </Search>
           </form>
