@@ -60,6 +60,7 @@ export default function AddPost({ children }) {
     if (error && error.message) setError(error.message);
     else if (post) setOpen(false);
   };
+  
   const uploadImage = React.useCallback(async ({ target: { files } }) => {
     const avatarFile = files[0];
     setLoading(true);
@@ -98,7 +99,6 @@ export default function AddPost({ children }) {
             sx={{ mt: 1 }}
           >
             {error !== "" && <Alert severity="error">{error}</Alert>}
-
             <TextField
               margin="normal"
               required
@@ -107,18 +107,20 @@ export default function AddPost({ children }) {
               label="text"
               name="text"
               autoFocus
+              variant="standard"
+              rows={4}
             />
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="image"
-              label="image"
-              type="file"
-              id="image"
-              onChange={uploadImage}
-            />
+            <Button variant="contained" component="label">
+              Upload File
+              <input
+                type="file"
+                name="image"
+                id="image"
+                accept="image/*"
+                onChange={uploadImage}
+                hidden
+              />
+            </Button>
             <LoadingButton
               loading={loading}
               loadingPosition="end"

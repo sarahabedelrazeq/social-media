@@ -1,11 +1,34 @@
-import { Skeleton, Grid, Typography, Box } from "@mui/material";
+import {
+  Skeleton,
+  Grid,
+  Typography,
+  Box,
+  Alert,
+  TextField,
+  Modal,
+  Button,
+} from "@mui/material";
 import React from "react";
 import Post from "components/Post";
 import { useParams } from "react-router-dom";
 import { client } from "helpers";
 import { useLanguage } from "hooks";
-import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { LoadingButton } from "@mui/lab";
+import { Add } from "@mui/icons-material";
+import moment from "moment";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 700,
+  maxWidth: "100vw",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function Profile() {
   const [loading, setLoading] = React.useState(false);
@@ -22,7 +45,8 @@ export default function Profile() {
     let { data: posts, error } = await client
       .from("posts")
       .select(`*`)
-      .eq("user_id", id);
+      .eq("user_id", id)
+      .order("id", { ascending: false });
 
     setLoading(false);
     if (error) setPosts([]);
@@ -91,6 +115,30 @@ export default function Profile() {
     }
   }, [getUserData, getPosts, id]);
 
+  const uploadImage = React.useCallback(
+    async ({ target: { files } }) => {
+      const avatarFile = files[0];
+      const { data, error } = await client.storage
+        .from("users")
+        .upload("public/user-" + moment() + ".png", avatarFile);
+      if (data) {
+        const { error } = await client
+          .from("userData")
+          .update([
+            {
+              image:
+                "https://jhdpgjjcbrlbvddzodju.supabase.co/storage/v1/object/public/" +
+                data.Key,
+            },
+          ])
+          .eq("id", currentUser.id);
+
+        if (!error) getUserData(id);
+      }
+    },
+    [currentUser, getUserData, id]
+  );
+
   return (
     <div id="profile-page" className="page-container">
       <sections>
@@ -140,7 +188,18 @@ export default function Profile() {
                   {user.name}
                 </Typography>
                 {isCurrentUser ? (
-                  "edit image"
+
+                    <Button variant="contained" component="label">
+                      edit image
+                      <input
+                        type="file"
+                        name="image"
+                        id="image"
+                        accept="image/*"
+                        onChange={uploadImage}
+                        hidden
+                      />
+                    </Button>
                 ) : isFollowing ? (
                   <Button onClick={handleFollow}>following</Button>
                 ) : (
