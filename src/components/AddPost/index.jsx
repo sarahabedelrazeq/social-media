@@ -67,7 +67,6 @@ export default function AddPost({ children }) {
       .from("posts")
       .upload("public/post-" + moment() + ".png", avatarFile);
     setLoading(false);
-    console.log("data", data, files, error);
     if (data) setImage(data.Key);
     if (error) setError(error.message);
   }, []);

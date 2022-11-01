@@ -11,6 +11,7 @@ import Auth from "components/Auth";
 import Fallback from "components/Fallback";
 import { client } from "helpers";
 import { setUser } from "store/auth";
+import { getFriend } from "store/user";
 
 const routes = [
   {
@@ -35,6 +36,14 @@ const routes = [
     name: "Login",
     component: React.lazy(() => import("pages/Auth")),
     noAuth: true,
+  },
+  {
+    path: "/search/:search",
+    exact: true,
+    name: "Search",
+    component: React.lazy(() => import("pages/Search")),
+    layout: true,
+    auth: true,
   },
 ];
 
@@ -74,8 +83,10 @@ export default function App() {
 
   React.useEffect(() => {
     const user = client.auth.user();
-    if (user) getUserData(user.id);
-    else dispatch(setUser({}));
+    if (user) {
+      getUserData(user.id);
+      dispatch(getFriend());
+    } else dispatch(setUser({}));
   }, [dispatch, getUserData]);
 
   return (

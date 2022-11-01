@@ -11,9 +11,12 @@ import Header from "components/Header";
 import Rightbar from "components/Rightbar";
 import Sidebar from "components/Sidebar";
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function Layout({ children }) {
   const [value, setValue] = React.useState(1);
+  const { friends } = useSelector(({ user }) => user);
+
   return (
     <Box
       bgcolor={"background.default"}
@@ -56,7 +59,7 @@ export default function Layout({ children }) {
           sx={{ display: { xs: value !== 2 && "none", lg: "block" } }}
           px="16px"
         >
-          <Rightbar />
+          <Rightbar friends={friends} />
         </Grid>
       </Grid>
       <Paper

@@ -18,7 +18,6 @@ function DynamicForm({ fields, defaultValues, schema }) {
   const onSubmit = (data) => console.log(data);
   const theme = useTheme()
 
-  console.log("getValues(", watch());
 
   return (
     <FormProvider {...methods}>
@@ -45,7 +44,6 @@ function DynamicForm({ fields, defaultValues, schema }) {
               />
             )
           )}
-          <Test />
           <Col sm={6} xs={12}>
             <Button variant="primary" type="submit" className="text-white">
               submit

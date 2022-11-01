@@ -71,7 +71,6 @@ export default function AutocompleteInput({ field, ThemeTextField }) {
                   "border-danger": errors[field?.name],
                 })}
                 renderInput={(params) => {
-                  console.log("params", params);
                   return (
                     <ThemeTextField
                       {...params}

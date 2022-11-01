@@ -19,9 +19,8 @@ import supabase from "helpers/client";
 import { useLanguage } from "hooks";
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Search from "./components/Search";
-import StyledToolbar from "./components/StyledToolbar";
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
@@ -33,6 +32,7 @@ export default function Header() {
       navigate("/login");
     }
   };
+  const { search } = useParams();
 
   return (
     <AppBar position="sticky">
@@ -45,7 +45,7 @@ export default function Header() {
         mx={0}
       >
         <Grid item lg={2} xs={4} px="16px">
-          <img src="/images/sarah-logo.png" className="mw-100" />
+          <img src="/images/sarah-logo.png" alt="logo" className="mw-100" />
         </Grid>
         <Grid
           item
@@ -54,9 +54,24 @@ export default function Header() {
           sx={{ display: { xs: "none", lg: "block" } }}
           px="16px"
         >
-          <Search>
-            <InputBase placeholder="search..." className="w-100" />
-          </Search>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault()
+              const data = new FormData(event.currentTarget);
+              const search = data.get("search");
+              if(search)
+              navigate(`/search/${search}`)
+            }}
+          >
+            <Search>
+              <InputBase
+                placeholder="search..."
+                className="w-100"
+                name="search"
+                defaultValue={search || ""}
+              />
+            </Search>
+          </form>
         </Grid>
         <Grid item lg={4} xs={8} px="16px">
           <ul className="d-flex justify-content-end align-items-center h-100 m-0 w-100 p-0">
@@ -124,7 +139,7 @@ export default function Header() {
         {user && user.id && (
           <MenuItem>
             <Link
-               to={`/profile/${user.id}`}
+              to={`/profile/${user.id}`}
               style={{ color: "inherit", textDecoration: "none" }}
             >
               {language.Profile}

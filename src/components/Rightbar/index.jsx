@@ -2,21 +2,15 @@ import {
   Avatar,
   AvatarGroup,
   Box,
-  Divider,
   ImageList,
   ImageListItem,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
   Typography,
 } from "@mui/material";
 import { useLanguage } from "hooks";
 import React from "react";
-import users from "data/users.json";
 import { Link } from "react-router-dom";
 
-const Rightbar = () => {
+const Rightbar = ({friends}) => {
   const language = useLanguage();
 
   return (
@@ -28,7 +22,7 @@ const Rightbar = () => {
       </div>
       <div className="d-flex w-100 justify-content-center">
         <AvatarGroup max={7}>
-          {users.map((user, index) => (
+          {friends.map((user, index) => (
             <Link to={`/profile/${user.id}`} key={index}>
               <Avatar alt={user.name} src={user.image} />
             </Link>
