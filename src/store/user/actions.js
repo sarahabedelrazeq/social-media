@@ -7,7 +7,7 @@ export const getFeed = createAsyncThunk("user/getFeed", async (_, thunkAPI) => {
   try {
     let { data: posts, error } = await client
       .from("posts")
-      .select(`*, userData(*)`)
+      .select(`*, userData(*), liks(*)`)
       .order("id", { ascending: false });
 
     if (error && error.message) return rejectWithValue(error.message);
@@ -26,7 +26,7 @@ export const getFriend = createAsyncThunk(
     if (user && user.id) {
       try {
         let { data: friends } = await client
-          .from("following")
+          .from("")
           .select(`following_id`)
           .eq(`user_id`, user.id);
           

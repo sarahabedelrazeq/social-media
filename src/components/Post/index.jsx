@@ -9,7 +9,38 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-const Post = ({ image, text, time, user }) => {
+import client from "helpers/client";
+import React from "react";
+import { useSelector } from "react-redux";
+
+const Post = ({ image, text, time, user, liks, id }) => {
+  const currentUser = useSelector(({ auth }) => auth.user);
+  const [liked, setLiked] = React.useState();
+
+  React.useEffect(() => {
+    if (liks.filter(({ user_id }) => user_id === currentUser.id).length > 0)
+      setLiked(true);
+  }, [liks, currentUser.id]);
+
+  const handleLike = async (event) => {
+    if (!liked) {
+      const { data } = await client.from("liks").insert([
+        {
+          user_id: currentUser.id,
+          post_id: id,
+        },
+      ]);
+      if (data) setLiked(true);
+    } else {
+      let { data } = await client
+        .from("liks")
+        .delete(`*`)
+        .eq("user_id", currentUser.id)
+        .eq("post_id", id);
+      if (data) setLiked(false);
+    }
+  };
+
   return (
     <div>
       {user && (
@@ -47,10 +78,12 @@ const Post = ({ image, text, time, user }) => {
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
+            <IconButton onClick={handleLike} aria-label="add to favorites">
               <Checkbox
                 icon={<FavoriteBorder />}
                 checkedIcon={<Favorite sx={{ color: "red" }} />}
+                checked={liked}
+                key={liked}
               />
             </IconButton>
             <IconButton aria-label="share">
