@@ -22,7 +22,7 @@ const Rightbar = ({friends}) => {
       </div>
       <div className="d-flex w-100 justify-content-center">
         <AvatarGroup max={7}>
-          {friends.map((user, index) => (
+          {friends?.map((user, index) => (
             <Link to={`/profile/${user.id}`} key={index}>
               <Avatar alt={user.name} src={user.image} />
             </Link>

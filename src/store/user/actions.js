@@ -30,13 +30,13 @@ export const getFriend = createAsyncThunk(
           .select(`following_id`)
           .eq(`user_id`, user.id);
           
-        if (friends.length > 0) {
+        if (friends?.length > 0) {
           let { data: friendsData, error } = await client
             .from("userData")
             .select(`*`)
             .in(
               "id",
-              friends.map(({ following_id }) => following_id)
+              friends?.map(({ following_id }) => following_id)
             );
           if (error && error.message) return rejectWithValue(error.message);
           return friendsData;
