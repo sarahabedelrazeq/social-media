@@ -44,7 +44,7 @@ export default function Profile() {
     setLoading(true);
     let { data: posts, error } = await client
       .from("posts")
-      .select(`*`)
+      .select(`*, userData(*), liks(*)`)
       .eq("user_id", id)
       .order("id", { ascending: false });
 
