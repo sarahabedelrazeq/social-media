@@ -12,6 +12,7 @@ import {
 import client from "helpers/client";
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Post = ({ image, text, time, user, liks, id }) => {
   const currentUser = useSelector(({ auth }) => auth.user);
@@ -47,20 +48,22 @@ const Post = ({ image, text, time, user, liks, id }) => {
         <Card sx={{ marginBottom: "24px" }}>
           <CardHeader
             avatar={
-              <img
-                src={user.image}
-                width={50}
-                height={50}
-                className="rounded-circle"
-                alt={user.name}
-              />
+              <Link to={`/profile/${user.id}`}>
+                <img
+                  src={user.image}
+                  width={50}
+                  height={50}
+                  className="rounded-circle"
+                  alt={user.name}
+                />
+              </Link>
             }
             action={
               <IconButton aria-label="settings">
                 <MoreVert />
               </IconButton>
             }
-            title={user.name}
+            title={<Link to={`/profile/${user.id}`}>{user.name}</Link>}
             subheader={time}
           />
           {image && (

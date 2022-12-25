@@ -2,3 +2,8 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./base";
 @import "./global";
+
+a{
+    color: inherit !important;
+    text-decoration: none;
+}
