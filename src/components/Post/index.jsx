@@ -18,7 +18,7 @@ const Post = ({ image, text, time, user, liks, id }) => {
   const [liked, setLiked] = React.useState();
 
   React.useEffect(() => {
-    if (liks.filter(({ user_id }) => user_id === currentUser.id).length > 0)
+    if (liks?.filter(({ user_id }) => user_id === currentUser.id).length > 0)
       setLiked(true);
   }, [liks, currentUser.id]);
 
