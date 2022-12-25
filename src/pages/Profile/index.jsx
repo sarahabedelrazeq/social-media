@@ -179,7 +179,7 @@ export default function Profile() {
                     alt={user.name}
                     width="200"
                     height="200"
-                    className="rounded-circle"
+                    className="rounded-circle object-fit-cover"
                   />
                 </Box>
               </Box>

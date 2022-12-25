@@ -53,7 +53,7 @@ const Post = ({ image, text, time, user, liks, id }) => {
                   src={user.image}
                   width={50}
                   height={50}
-                  className="rounded-circle"
+                  className="rounded-circle object-fit-cover"
                   alt={user.name}
                 />
               </Link>
